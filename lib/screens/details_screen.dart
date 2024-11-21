@@ -1,3 +1,5 @@
+import 'package:fitness_two/screens/showmodalbottomsheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fitness_two/constants.dart';
@@ -12,12 +14,12 @@ class DetailsScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
-            height: size.height * .45,
+            height: size.height * .20,
             decoration: BoxDecoration(
               color: kBlueLightColor,
               image: DecorationImage(
                 image: AssetImage("assets/images/meditation_bg.png"),
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -31,83 +33,93 @@ class DetailsScreen extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.05,
                     ),
-                    Text(
-                      "Meditation",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4!
-                          .copyWith(fontWeight: FontWeight.w900),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      "3-10 MIN Course",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      width: size.width * .6, // it just take 60% of total width
-                      child: Text(
-                        "Live happier and healthier by learning the fundamentals of meditation and mindfulness",
-                      ),
+                    Row(
+                      children: [
+                        ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: Icon(Icons.chevron_left_outlined),
+                            label: Text(
+                              "Tutorial",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(fontWeight: FontWeight.w900),
+                            )),
+                      ],
                     ),
                     SizedBox(
                       width: size.width * .5,
-                      height: 110.0,
+                      height: 60.0,
                     ),
-                    SizedBox(height: 50),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 20),
-                      height: MediaQuery.of(context).size.height / 2.5,
+                      margin: EdgeInsets.symmetric(vertical: 1),
+                      height: MediaQuery.of(context).size.height / 1.5,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 20),
-                              padding: EdgeInsets.all(10),
-                              height: 90,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(13),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 17),
-                                    blurRadius: 23,
-                                    spreadRadius: -13,
-                                    color: kShadowColor,
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  SvgPicture.asset(
-                                    "assets/icons/Meditation_women_small.svg",
-                                  ),
-                                  SizedBox(width: 20),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          "Basic 2",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle1,
-                                        ),
-                                        Text("Start your deepen you practice")
-                                      ],
+                            GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16.0),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: SvgPicture.asset(
-                                        "assets/icons/Lock.svg"),
-                                  ),
-                                ],
+                                  builder: (BuildContext? context) {
+                                    return ShowModalSheetTutorial();
+                                  },
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(vertical: 20),
+                                padding: EdgeInsets.all(10),
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(13),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0, 17),
+                                      blurRadius: 23,
+                                      spreadRadius: -13,
+                                      color: kShadowColor,
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: <Widget>[
+                                    SvgPicture.asset(
+                                      "assets/icons/Meditation_women_small.svg",
+                                    ),
+                                    SizedBox(width: 20),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            "Basic 2",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1,
+                                          ),
+                                          Text("Start your deepen you practice")
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: SvgPicture.asset(
+                                          "assets/icons/Lock.svg"),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Container(
